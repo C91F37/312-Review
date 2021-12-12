@@ -10,7 +10,8 @@ import Text.Read (readMaybe)
 -- Apply the function to every element of the list.
 -- myMap (+ 1) [1, 2, 3] == [2, 3, 4]
 myMap :: (a -> b) -> [a] -> [b]
-myMap f xs = error "TODO"
+myMap _ [] = []
+myMap f (x:xs) = f x : myMap f (xs)
 
 -- Reimplement Prelude.filter
 -- Return the elements of the list that satisfy the predicate.
