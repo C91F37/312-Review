@@ -17,7 +17,10 @@ myMap f (x:xs) = f x : myMap f (xs)
 -- Return the elements of the list that satisfy the predicate.
 -- myFilter (\x -> x > 0) [-1, 0, 1] == [1]
 myFilter :: (a -> Bool) -> [a] -> [a]
-myFilter f xs = error "TODO"
+myFilter f xs = 
+  case xs of 
+    [] -> []
+    y : ys -> if f y then y : myFilter f ys else myFilter f ys
 
 -- Remember the definition of Maybe:
 -- data Maybe a = Just a | Nothing
@@ -26,7 +29,15 @@ myFilter f xs = error "TODO"
 -- Apply the function and keep the values inside 'Just', throwing away 'Nothing's.
 -- myMapMaybe (\x -> if x > 0 then Just (x + 1) else Nothing) [-1, 0, 1] == [2]
 myMapMaybe :: (a -> Maybe b) -> [a] -> [b]
-myMapMaybe f xs = error "TODO"
+myMapMaybe f xs = 
+  case xs of 
+    [] -> []
+    y : ys -> 
+      case f y of
+        Just z -> z : myMapMaybe f ys
+        Nothing -> myMapMaybe f ys 
+    
+    
 
 -- Now the fun stuff:
 -- You just got paged because a server went down at work. Your job is to
